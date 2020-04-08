@@ -76,6 +76,20 @@ public class CanalKafkaProducer extends AbstractMQProducer implements CanalMQPro
                 throw new RuntimeException(errorMsg);
             }
         }
+        if (kafkaProducerConfig.isSaslEnabled()) {
+            kafkaProperties.put("security.protocol", "SASL_PLAINTEXT");
+            String mechanism = kafkaProducerConfig.getSaslMechanism();
+            String username = kafkaProducerConfig.getSaslUserName();
+            String password = kafkaProducerConfig.getSaslPassword();
+            if (StringUtils.isEmpty(mechanism) || StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+                String errorMsg = "ERROR # The kafka sasl configuration param is empty! please check it";
+                logger.error(errorMsg);
+                throw new RuntimeException(errorMsg);
+            }
+            kafkaProperties.put("sasl.mechanism", mechanism);
+            kafkaProperties.put("sasl.username", username);
+            kafkaProperties.put("sasl.password", password);
+        }
         kafkaProperties.put("value.serializer", KafkaMessageSerializer.class);
         producer = new KafkaProducer<>(kafkaProperties);
     }
@@ -103,6 +117,23 @@ public class CanalKafkaProducer extends AbstractMQProducer implements CanalMQPro
         String jaasFile = properties.getProperty(KafkaConstants.CANAL_MQ_KAFKA_KERBEROS_JAAS_FILE);
         if (!StringUtils.isEmpty(jaasFile)) {
             kafkaProducerConfig.setJaasFile(jaasFile);
+        }
+
+        String saslEnabled = properties.getProperty(KafkaConstants.CANAL_MQ_KAFKA_SASL_ENABLE);
+        if (!StringUtils.isEmpty(saslEnabled)) {
+            kafkaProducerConfig.setSaslEnabled(Boolean.parseBoolean(saslEnabled));
+        }
+        String saslMechianism = properties.getProperty(KafkaConstants.CANAL_MQ_KAFKA_SASL_MECHANISM);
+        if (!StringUtils.isEmpty(saslMechianism)) {
+            kafkaProducerConfig.setSaslMechanism(saslMechianism);
+        }
+        String saslUserName = properties.getProperty(KafkaConstants.CANAL_MQ_KAFKA_SASL_USERNAME);
+        if (!StringUtils.isEmpty(saslUserName)) {
+            kafkaProducerConfig.setSaslUserName(saslUserName);
+        }
+        String saslPassword = properties.getProperty(KafkaConstants.CANAL_MQ_KAFKA_SASL_PASSWORD);
+        if (!StringUtils.isEmpty(saslPassword)) {
+            kafkaProducerConfig.setSaslPassword(saslPassword);
         }
     }
 

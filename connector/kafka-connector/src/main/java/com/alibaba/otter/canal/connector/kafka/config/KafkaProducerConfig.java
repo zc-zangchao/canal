@@ -19,6 +19,11 @@ public class KafkaProducerConfig extends MQProperties {
     private String              krb5File;
     private String              jaasFile;
 
+    private boolean             saslEnabled = false;
+    private String              saslMechanism;
+    private String              saslUserName;
+    private String              saslPassword;
+
     public Map<String, Object> getKafkaProperties() {
         return kafkaProperties;
     }
@@ -49,5 +54,37 @@ public class KafkaProducerConfig extends MQProperties {
 
     public void setJaasFile(String jaasFile) {
         this.jaasFile = jaasFile;
+    }
+
+    public boolean isSaslEnabled() {
+        return saslEnabled;
+    }
+
+    public void setSaslEnabled(boolean saslEnabled) {
+        this.saslEnabled = saslEnabled;
+    }
+
+    public String getSaslMechanism() {
+        return saslMechanism;
+    }
+
+    public void setSaslMechanism(String saslMechanism) {
+        this.saslMechanism = saslMechanism;
+    }
+
+    public String getSaslUserName() {
+        return saslUserName;
+    }
+
+    public void setSaslUserName(String saslUserName) {
+        this.saslUserName = saslUserName;
+    }
+
+    public String getSaslPassword() {
+        return saslPassword;
+    }
+
+    public void setSaslPassword(String saslPassword) {
+        this.saslPassword = saslPassword;
     }
 }
