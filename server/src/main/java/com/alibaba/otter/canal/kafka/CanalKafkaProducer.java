@@ -72,6 +72,20 @@ public class CanalKafkaProducer implements CanalMQProducer {
                 throw new RuntimeException(errorMsg);
             }
         }
+        if (kafkaProperties.isSaslEnabled()) {
+            properties.put("security.protocol", "SASL_PLAINTEXT");
+            String mechanism = kafkaProperties.getSaslMechanism();
+            String username = kafkaProperties.getSaslUserName();
+            String password = kafkaProperties.getSaslPassword();
+            if (StringUtils.isEmpty(mechanism) || StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
+                String errorMsg = "ERROR # The kafka sasl configuration param is empty! please check it";
+                logger.error(errorMsg);
+                throw new RuntimeException(errorMsg);
+            }
+            properties.put("sasl.mechanism", mechanism);
+            properties.put("sasl.username", username);
+            properties.put("sasl.password", password);
+        }
 
         if (!kafkaProperties.getFlatMessage()) {
             properties.put("value.serializer", MessageSerializer.class.getName());

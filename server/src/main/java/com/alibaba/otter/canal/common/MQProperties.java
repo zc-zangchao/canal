@@ -33,6 +33,10 @@ public class MQProperties {
     private boolean    kerberosEnable         = false;           // kafka集群是否启动Kerberos认证
     private String     kerberosKrb5FilePath   = "";              // 启动Kerberos认证时配置为krb5.conf文件的路径
     private String     kerberosJaasFilePath   = "";              // 启动Kerberos认证时配置为jaas.conf文件的路径
+    private boolean    saslEnabled            = false;
+    private String     saslMechanism          = "";
+    private String     saslUserName           = "";
+    private String     saslPassword           = "";
 
     public static class CanalDestination {
 
@@ -276,6 +280,38 @@ public class MQProperties {
         this.kerberosJaasFilePath = kerberosJaasFilePath;
     }
 
+    public boolean isSaslEnabled() {
+        return saslEnabled;
+    }
+
+    public void setSaslEnabled(boolean saslEnabled) {
+        this.saslEnabled = saslEnabled;
+    }
+
+    public String getSaslMechanism() {
+        return saslMechanism;
+    }
+
+    public void setSaslMechanism(String saslMechanism) {
+        this.saslMechanism = saslMechanism;
+    }
+
+    public String getSaslUserName() {
+        return saslUserName;
+    }
+
+    public void setSaslUserName(String saslUserName) {
+        this.saslUserName = saslUserName;
+    }
+
+    public String getSaslPassword() {
+        return saslPassword;
+    }
+
+    public void setSaslPassword(String saslPassword) {
+        this.saslPassword = saslPassword;
+    }
+
     @Override
     public String toString() {
         return "MQProperties{" + "servers='" + servers + '\'' + ", retries=" + retries + ", batchSize=" + batchSize
@@ -287,6 +323,8 @@ public class MQProperties {
                + ", properties=" + properties + ", enableMessageTrace=" + enableMessageTrace + ", accessChannel='"
                + accessChannel + '\'' + ", customizedTraceTopic='" + customizedTraceTopic + '\'' + ", namespace='"
                + namespace + '\'' + ", kerberosEnable='" + kerberosEnable + '\'' + ", kerberosKrb5FilePath='"
-               + kerberosKrb5FilePath + '\'' + ", kerberosJaasFilePath='" + kerberosJaasFilePath + '\'' + '}';
+               + kerberosKrb5FilePath + '\'' + ", kerberosJaasFilePath='" + kerberosJaasFilePath + '\''
+               + ", saslEnable='" + saslEnabled + '\'' + ", saslMechanism='" + saslMechanism + '\''
+               + ", saslUserName='" + saslUserName + '\'' + ", saslPassword='" + saslPassword + '\'' + '}';
     }
 }

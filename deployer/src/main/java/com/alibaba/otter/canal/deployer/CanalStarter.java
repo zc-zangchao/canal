@@ -260,6 +260,23 @@ public class CanalStarter {
             mqProperties.setKerberosJaasFilePath(kafkaKerberosJaasFilepath);
         }
 
+        String kafkaSaslEnabled = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_ENABLE);
+        if (!StringUtils.isEmpty(kafkaSaslEnabled)) {
+            mqProperties.setSaslEnabled(Boolean.parseBoolean(kafkaSaslEnabled));
+        }
+        String kafkaSaslMechianism = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_MECHANISM);
+        if (!StringUtils.isEmpty(kafkaSaslMechianism)) {
+            mqProperties.setSaslMechanism(kafkaSaslMechianism);
+        }
+        String kafkaSaslUserName = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_USERNAME);
+        if (!StringUtils.isEmpty(kafkaSaslUserName)) {
+            mqProperties.setSaslUserName(kafkaSaslUserName);
+        }
+        String kafkaSaslPassword = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_PASSWORD);
+        if (!StringUtils.isEmpty(kafkaSaslPassword)) {
+            mqProperties.setSaslPassword(kafkaSaslPassword);
+        }
+
         for (Object key : properties.keySet()) {
             key = StringUtils.trim(key.toString());
             if (((String) key).startsWith(CanalConstants.CANAL_MQ_PROPERTIES)) {
