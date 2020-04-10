@@ -71,8 +71,7 @@ public class CanalConstants {
     public static final String CANAL_MQ_KAFKA_KERBEROS_JAASFILEPATH = ROOT + "." + "mq.kafka.kerberos.jaasFilePath";
     public static final String CANAL_MQ_KAFKA_SASL_ENABLE           = ROOT + "." + "mq.kafka.sasl.enable";
     public static final String CANAL_MQ_KAFKA_SASL_MECHANISM        = ROOT + "." + "mq.kafka.sasl.mechanism";
-    public static final String CANAL_MQ_KAFKA_SASL_USERNAME         = ROOT + "." + "mq.kafka.sasl.username";
-    public static final String CANAL_MQ_KAFKA_SASL_PASSWORD         = ROOT + "." + "mq.kafka.sasl.password";
+    public static final String CANAL_MQ_KAFKA_SASL_JAASFILEPATH     = ROOT + "." + "mq.kafka.sasl.jaasFilePath";
 
     public static String getInstanceModeKey(String destination) {
         return MessageFormat.format(INSTANCE_MODE_TEMPLATE, destination);

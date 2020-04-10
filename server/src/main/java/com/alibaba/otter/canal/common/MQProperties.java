@@ -35,8 +35,7 @@ public class MQProperties {
     private String     kerberosJaasFilePath   = "";              // 启动Kerberos认证时配置为jaas.conf文件的路径
     private boolean    saslEnabled            = false;
     private String     saslMechanism          = "";
-    private String     saslUserName           = "";
-    private String     saslPassword           = "";
+    private String     saslJaasFilePath       = "";
 
     public static class CanalDestination {
 
@@ -296,20 +295,12 @@ public class MQProperties {
         this.saslMechanism = saslMechanism;
     }
 
-    public String getSaslUserName() {
-        return saslUserName;
+    public String getSaslJaasFilePath() {
+        return saslJaasFilePath;
     }
 
-    public void setSaslUserName(String saslUserName) {
-        this.saslUserName = saslUserName;
-    }
-
-    public String getSaslPassword() {
-        return saslPassword;
-    }
-
-    public void setSaslPassword(String saslPassword) {
-        this.saslPassword = saslPassword;
+    public void setSaslJaasFilePath(String saslJaasFilePath) {
+        this.saslJaasFilePath = saslJaasFilePath;
     }
 
     @Override
@@ -325,6 +316,6 @@ public class MQProperties {
                + namespace + '\'' + ", kerberosEnable='" + kerberosEnable + '\'' + ", kerberosKrb5FilePath='"
                + kerberosKrb5FilePath + '\'' + ", kerberosJaasFilePath='" + kerberosJaasFilePath + '\''
                + ", saslEnable='" + saslEnabled + '\'' + ", saslMechanism='" + saslMechanism + '\''
-               + ", saslUserName='" + saslUserName + '\'' + ", saslPassword='" + saslPassword + '\'' + '}';
+               + ", saslJaasFilePath='" + saslJaasFilePath + '\'' + '}';
     }
 }

@@ -73,18 +73,17 @@ public class CanalKafkaProducer implements CanalMQProducer {
             }
         }
         if (kafkaProperties.isSaslEnabled()) {
-            properties.put("security.protocol", "SASL_PLAINTEXT");
+            File jaasFile = new File(kafkaProperties.getSaslJaasFilePath());
             String mechanism = kafkaProperties.getSaslMechanism();
-            String username = kafkaProperties.getSaslUserName();
-            String password = kafkaProperties.getSaslPassword();
-            if (StringUtils.isEmpty(mechanism) || StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
-                String errorMsg = "ERROR # The kafka sasl configuration param is empty! please check it";
+            if (jaasFile.exists() && !StringUtils.isEmpty(mechanism)) {
+                System.setProperty("java.security.auth.login.config", jaasFile.getAbsolutePath());
+                properties.put("security.protocol", "SASL_PLAINTEXT");
+                properties.put("sasl.mechanism", mechanism);
+            } else {
+                String errorMsg = "ERROR # The kafka sasl configuration file does not exist or param is empty! please check it";
                 logger.error(errorMsg);
                 throw new RuntimeException(errorMsg);
             }
-            properties.put("sasl.mechanism", mechanism);
-            properties.put("sasl.username", username);
-            properties.put("sasl.password", password);
         }
 
         if (!kafkaProperties.getFlatMessage()) {

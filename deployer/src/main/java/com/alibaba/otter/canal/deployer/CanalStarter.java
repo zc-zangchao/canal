@@ -268,13 +268,9 @@ public class CanalStarter {
         if (!StringUtils.isEmpty(kafkaSaslMechianism)) {
             mqProperties.setSaslMechanism(kafkaSaslMechianism);
         }
-        String kafkaSaslUserName = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_USERNAME);
-        if (!StringUtils.isEmpty(kafkaSaslUserName)) {
-            mqProperties.setSaslUserName(kafkaSaslUserName);
-        }
-        String kafkaSaslPassword = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_PASSWORD);
-        if (!StringUtils.isEmpty(kafkaSaslPassword)) {
-            mqProperties.setSaslPassword(kafkaSaslPassword);
+        String kafkaSaslJaasFilepath = properties.getProperty(CanalConstants.CANAL_MQ_KAFKA_SASL_JAASFILEPATH);
+        if (!StringUtils.isEmpty(kafkaSaslJaasFilepath)) {
+            mqProperties.setSaslJaasFilePath(kafkaSaslJaasFilepath);
         }
 
         for (Object key : properties.keySet()) {
